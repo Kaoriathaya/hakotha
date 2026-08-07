@@ -1,69 +1,125 @@
-import Image from "next/image";
+import Logo from '@/components/Logo'
+import TechnologySection from '@/components/TechnologySection'
+
+const panels = [
+  {
+    title: 'Products',
+    bg: 'bg-onyx-600',
+    icon: (
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+        <rect x="4" y="4" width="26" height="26" rx="4" stroke="#00F0FF" strokeWidth="2" />
+        <path d="M11 22c0-6 0-10 6-11" stroke="#00F0FF" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Process',
+    bg: 'bg-onyx-700',
+    icon: (
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <polygon points="15,4 26,15 15,26 4,15" stroke="#FF4B00" strokeWidth="2" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Technology',
+    bg: 'bg-onyx-600',
+    icon: (
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <rect x="5" y="5" width="20" height="20" rx="4" stroke="#00F0FF" strokeWidth="2" />
+        <path d="M10 10l10 10" stroke="#00F0FF" strokeWidth="2" strokeLinecap="round" />
+        <path d="M20 10l-10 10" stroke="#00F0FF" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Gallery',
+    bg: 'bg-onyx-700',
+    icon: (
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <circle cx="15" cy="15" r="11" stroke="#00F0FF" strokeWidth="2" />
+        <circle cx="15" cy="15" r="4" fill="#00F0FF" />
+      </svg>
+    ),
+  },
+]
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main>
+      {/* Hero */}
+      <section className="grid md:grid-cols-2">
+        <div className="flex min-h-[280px] items-center justify-center bg-onyx-600 p-10">
+          <Logo size={160} />
+        </div>
+
+        <div className="flex flex-col justify-center p-10 md:p-16 bg-onyx-700">
+          <span className="mb-2 text-xs font-bold tracking-[0.2em] text-cyan-500">
+            3D PRINTING STUDIO
+          </span>
+          <h1 className="mb-4 font-display text-4xl font-bold tracking-tight text-white md:text-5xl">
+            Hakotha
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mb-8 max-w-md text-[15px] leading-relaxed text-onyx-500">
+            Kami mengubah ide dan desain digital jadi objek nyata, lapis demi
+            lapis. Dari prototipe cepat sampai produk custom, presisi dan
+            kualitas jadi prioritas utama.
           </p>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="#products"
+              className="rounded-md bg-cyan-500 px-5 py-2.5 text-sm font-bold text-onyx-700 transition hover:opacity-90"
+            >
+              Lihat katalog
+            </a>
+            <a
+              href="#contact"
+              className="rounded-md border border-onyx-500 px-5 py-2.5 text-sm font-bold text-white transition hover:border-cyan-500"
+            >
+              Hubungi kami
+            </a>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+      </section>
+
+      
+      <section className="grid border-t border-onyx-500/20 md:grid-cols-4">
+        {panels.map((panel) => (
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            key={panel.title}
+            href={`#${panel.title.toLowerCase()}`}
+            className={`${panel.bg} flex items-center justify-between p-8 transition hover:brightness-125`}
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
+            <span className="font-display text-xl font-bold tracking-wide text-white">
+              {panel.title.toUpperCase()}
+            </span>
+            {panel.icon}
           </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+        ))}
+      </section>
+
+      <section id="products" className="p-10 md:p-16">
+        <h2 className="mb-6 font-display text-2xl font-bold text-white">
+          Products
+        </h2>
+      </section>
+
+      <section id="process" className="bg-onyx-600 p-10 md:p-16">
+        <h2 className="mb-6 font-display text-2xl font-bold text-white">
+          Process
+        </h2>
+        <p className="max-w-lg text-onyx-500">
+          Alur pemesanan: upload desain → cetak → kirim.
+        </p>
+      </section>
+
+      <TechnologySection />
+
+      <section id="gallery" className="bg-onyx-600 p-10 md:p-16">
+        <h2 className="mb-6 font-display text-2xl font-bold text-white">
+          Gallery
+        </h2>
+      </section>
+    </main>
+  )
 }
