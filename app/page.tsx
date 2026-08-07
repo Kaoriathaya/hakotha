@@ -1,9 +1,12 @@
-import Logo from '@/components/Logo'
-import TechnologySection from '@/components/TechnologySection'
+import Link from 'next/link';
+import Logo from '@/components/Logo';
+import TechnologySection from '@/components/TechnologySection';
+import OrderStatusChecker from '@/components/OrderStatusChecker';
 
 const panels = [
   {
     title: 'Products',
+    href: '/products',
     bg: 'bg-onyx-600',
     icon: (
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
@@ -66,14 +69,16 @@ export default function Home() {
             kualitas jadi prioritas utama.
           </p>
           <div className="flex flex-wrap gap-3">
-            <a
-              href="#products"
+            <Link
+              href="/products"
               className="rounded-md bg-cyan-500 px-5 py-2.5 text-sm font-bold text-onyx-700 transition hover:opacity-90"
             >
               Lihat katalog
-            </a>
+            </Link>
             <a
-              href="#contact"
+              href="https://wa.me/6282327561340"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-md border border-onyx-500 px-5 py-2.5 text-sm font-bold text-white transition hover:border-cyan-500"
             >
               Hubungi kami
@@ -85,32 +90,23 @@ export default function Home() {
       
       <section className="grid border-t border-onyx-500/20 md:grid-cols-4">
         {panels.map((panel) => (
-          <a
+          <Link
             key={panel.title}
-            href={`#${panel.title.toLowerCase()}`}
+            href={panel.href ?? `#${panel.title.toLowerCase()}`}
             className={`${panel.bg} flex items-center justify-between p-8 transition hover:brightness-125`}
           >
             <span className="font-display text-xl font-bold tracking-wide text-white">
               {panel.title.toUpperCase()}
             </span>
             {panel.icon}
-          </a>
+          </Link>
         ))}
       </section>
-
-      <section id="products" className="p-10 md:p-16">
-        <h2 className="mb-6 font-display text-2xl font-bold text-white">
-          Products
-        </h2>
-      </section>
-
-      <section id="process" className="bg-onyx-600 p-10 md:p-16">
+      <section id="process" className="bg-onyx-700 p-10 md:p-16">
         <h2 className="mb-6 font-display text-2xl font-bold text-white">
           Process
         </h2>
-        <p className="max-w-lg text-onyx-500">
-          Alur pemesanan: upload desain → cetak → kirim.
-        </p>
+        <OrderStatusChecker />
       </section>
 
       <TechnologySection />
