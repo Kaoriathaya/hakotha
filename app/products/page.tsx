@@ -19,6 +19,19 @@ export default async function ProductsPage() {
         <p className="mt-3 max-w-2xl text-onyx-300">
           Pilih produk 3D printed dengan opsi color dan size. Klik kartu untuk melihat detail lengkap.
         </p>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-2xl text-sm font-bold text-onyx-300">
+            Produk lainnya juga tersedia di Shopee. Cek koleksi lengkap toko kami untuk varian dan promo terbaru.
+          </p>
+          <a
+            href="https://id.shp.ee/tEaCJt39"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-2xl bg-orange-500 px-5 py-3 text-sm font-bold text-onyx-900 transition hover:bg-orange-400"
+          >
+            Kunjungi Shopee
+          </a>
+        </div>
       </header>
 
       <section className="grid gap-6 xl:grid-cols-3 lg:grid-cols-2">

@@ -69,12 +69,14 @@ export default function Home() {
             kualitas jadi prioritas utama.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Link
-              href="/products"
+            <a
+              href="https://id.shp.ee/tEaCJt39"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-md bg-cyan-500 px-5 py-2.5 text-sm font-bold text-onyx-700 transition hover:opacity-90"
             >
               Lihat katalog
-            </Link>
+            </a>
             <a
               href="https://wa.me/6282327561340"
               target="_blank"

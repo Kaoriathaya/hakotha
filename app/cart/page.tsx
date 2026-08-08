@@ -21,6 +21,13 @@ export default function CartPage() {
   const [orderCode, setOrderCode] = useState('');
   const [message, setMessage] = useState('');
 
+  const saveCart = (items: CartItem[]) => {
+    setCartItems(items);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(CART_KEY, JSON.stringify(items));
+    }
+  };
+
   useEffect(() => {
     const stored = typeof window !== 'undefined' ? localStorage.getItem(CART_KEY) : null;
     if (stored) {
@@ -32,6 +39,27 @@ export default function CartPage() {
     () => cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
     [cartItems]
   );
+
+  const handleQuantityChange = (item: CartItem, delta: number) => {
+    const nextItems = cartItems
+      .map((cartItem) => {
+        if (cartItem.productId === item.productId && cartItem.color === item.color && cartItem.size === item.size) {
+          return { ...cartItem, quantity: Math.max(cartItem.quantity + delta, 0) };
+        }
+        return cartItem;
+      })
+      .filter((cartItem) => cartItem.quantity > 0);
+
+    saveCart(nextItems);
+  };
+
+  const handleRemoveItem = (item: CartItem) => {
+    saveCart(
+      cartItems.filter(
+        (cartItem) => !(cartItem.productId === item.productId && cartItem.color === item.color && cartItem.size === item.size)
+      )
+    );
+  };
 
   const handleCheckout = async () => {
     if (!name.trim() || !phone.trim()) {
@@ -92,13 +120,39 @@ export default function CartPage() {
           <div className="space-y-4">
             {cartItems.map((item) => (
               <div key={`${item.slug}-${item.color}-${item.size}`} className="rounded-3xl border border-onyx-500 bg-onyx-600 p-5">
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <p className="text-lg font-bold text-white">{item.name}</p>
                     <p className="text-sm text-onyx-300">{item.color} • {item.size}</p>
-                    <p className="mt-3 text-sm text-onyx-300">Qty: {item.quantity}</p>
+                    <div className="mt-4 flex items-center gap-2 rounded-2xl bg-onyx-700 p-3">
+                      <button
+                        type="button"
+                        onClick={() => handleQuantityChange(item, -1)}
+                        className="rounded-full border border-onyx-500 bg-onyx-600 px-3 py-1 text-sm font-bold text-white transition hover:bg-onyx-500"
+                      >
+                        -
+                      </button>
+                      <span className="px-3 text-sm font-bold text-white">{item.quantity}</span>
+                      <button
+                        type="button"
+                        onClick={() => handleQuantityChange(item, 1)}
+                        className="rounded-full border border-onyx-500 bg-onyx-600 px-3 py-1 text-sm font-bold text-white transition hover:bg-onyx-500"
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
-                  <p className="text-lg font-bold text-white">Rp{(item.price * item.quantity).toLocaleString('id-ID')}</p>
+
+                  <div className="flex flex-col items-start gap-3 sm:items-end">
+                    <p className="text-lg font-bold text-white">Rp{(item.price * item.quantity).toLocaleString('id-ID')}</p>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveItem(item)}
+                      className="rounded-2xl border border-rose-500 px-4 py-2 text-sm font-bold text-rose-200 transition hover:bg-rose-500/10"
+                    >
+                      Hapus
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
