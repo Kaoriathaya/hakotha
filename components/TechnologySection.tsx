@@ -14,7 +14,7 @@ export default function TechnologySection() {
             />
           </div>
           <h3 className="mb-2 font-display text-xl font-bold text-white">
-            Bambu Lab A1 Mini
+            Bambu Lab A1 Series
           </h3>
           <p className="text-sm leading-relaxed text-onyx-500">
             Mesin pencetak 3D compact dengan presisi tinggi untuk prototipe dan produk custom.
