@@ -9,7 +9,7 @@ export default function TechnologySection() {
           <div className="mb-4 overflow-hidden rounded-3xl bg-onyx-600">
             <img
               src="https://th.bing.com/th/id/OIP.zX1lDwucN6mlUY0g6PgF_wHaHa?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
-              alt="Bambu Lab A1 Mini"
+              alt="Bambu Lab A1 Series"
               className="h-40 w-full object-cover"
             />
           </div>
